@@ -1,0 +1,56 @@
+# Operating System
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon\r\r
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+
+# Environment & Secrets
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# Node.js & Web
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+dist/
+dist-ssr/
+coverage/
+*.lcov
+.turbo/
+
+# Rust & Tauri
+src-tauri/target/
+src-tauri/Cargo.lock
+target/
+**/*.rs.bk
+
+# Local Database & Cache
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+.cache/
+tmp/
+temp/
+
+# Git Worktrees (local agent worktrees)
+.worktrees/
+worktrees/
+
+# IDE & Editor
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.sublime-project
+*.sublime-workspace
