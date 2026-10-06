@@ -30,9 +30,10 @@ coverage/
 
 # Rust & Tauri
 src-tauri/target/
-src-tauri/Cargo.lock
 target/
 **/*.rs.bk
+# NOTE: Cargo.lock is committed for binary crates (Tauri desktop app)
+# See: https://doc.rust-lang.org/cargo/guide/cargo-toml-vs-cargo-lock.html
 
 # Local Database & Cache
 *.db
@@ -46,6 +47,7 @@ temp/
 # Git Worktrees (local agent worktrees)
 .worktrees/
 worktrees/
+.helm/
 
 # IDE & Editor
 .vscode/*
@@ -54,3 +56,6 @@ worktrees/
 .idea/
 *.sublime-project
 *.sublime-workspace
+
+# Superpowers / SDD workspaces (git-ignored scratch)
+.superpowers/

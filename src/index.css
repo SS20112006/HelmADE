@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+@theme {
+  /* Apple HIG Color Tokens — Dark Mode Native */
+  --color-sf-primary: rgba(255, 255, 255, 0.92);      /* texto primário dark mode */
+  --color-sf-secondary: rgba(255, 255, 255, 0.6);     /* texto secundário */
+  --color-sf-tertiary: rgba(255, 255, 255, 0.36);     /* texto terciário */
+  --color-sf-separator: rgba(255, 255, 255, 0.15);    /* separadores */
+  --color-sf-fill: rgba(255, 255, 255, 0.08);         /* fills de superfícies */
+
+  /* macOS Semantic Accent Colors */
+  --color-accent-blue: #0a84ff;                        /* azul sistema macOS */
+  --color-accent-gold: #ffd60a;                        /* dourado Orquestrador */
+  --color-accent-green: #30d158;                       /* verde sucesso */
+  --color-accent-red: #ff453a;                         /* vermelho erro */
+  --color-accent-purple: #bf5af2;                      /* roxo QA */
+  --color-accent-orange: #ff9f0a;                      /* laranja aviso */
+
+  /* SF Pro Typography Family */
+  --font-sf: 'SF Pro Text', 'SF Pro Display', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* macOS Border Radius */
+  --radius-macos: 10px;
+  --radius-macos-lg: 14px;
+  --radius-macos-sm: 6px;
+}
+
+/* Reset & Base */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sf);
+  font-size: 13px; /* SF Pro Text base — <19pt */
+  line-height: 1.47;
+  background: transparent; /* allows native macOS vibrancy */
+  color: var(--color-sf-primary);
+  /* ponytail: transparent background depends on Tauri vibrancy config;
+     upgrade path: add #1c1c1e fallback for non-macOS platforms */
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Allow text selection only in input fields and code */
+input,
+textarea,
+[data-selectable] {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* Native macOS drag region for custom title bar */
+[data-tauri-drag-region] {
+  -webkit-app-region: drag;
+}
+
+/* Override drag in interactive elements inside drag region */
+[data-tauri-drag-region] button,
+[data-tauri-drag-region] a,
+[data-tauri-drag-region] input {
+  -webkit-app-region: no-drag;
+}
