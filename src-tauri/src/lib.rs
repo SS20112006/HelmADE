@@ -45,6 +45,11 @@ pub fn run() {
             commands::worktree::remove_worktree,
             commands::worktree::list_worktrees,
             commands::symlink::symlink_dependencies,
+            // Comandos de Git Diff & Merge Seguro
+            commands::worktree::get_worktree_diff,
+            commands::worktree::get_file_diff,
+            commands::worktree::merge_worktree,
+            commands::worktree::abort_merge,
             // Comandos de Alocação de Rede & Portas
             commands::network::allocate_swarm_port,
             commands::network::release_swarm_port,

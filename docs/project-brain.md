@@ -20,6 +20,7 @@
 3. **Concorrência Segura sem Corrupção de Código**:
    - Cada grelha opera estritamente no seu próprio **Git Worktree** (`helm/swarm-*`).
    - Symlinks automáticos de pastas pesadas de dependências (`node_modules/`, `.venv/`).
+   - Fusão Segura: Diffs revisados visualmente com suporte a `Squash & Merge` e `Rebase Merge`, abortando de imediato em caso de conflitos para manter a árvore principal intacta.
    - Proibição absoluta de editar a mesma pasta em simultâneo por múltiplos agentes sem Worktree.
 4. **Design & Tipografia Apple HIG**:
    - Família San Francisco obrigatória: **SF Pro Text** (`<= 19pt`) com tracking ótico vs **SF Pro Display** (`>= 20pt`).
@@ -56,3 +57,17 @@
 * `docs/adr/2026-10-06-0002-git-worktree-symlink-isolation.md`: Isolamento de grelhas por Git Worktree + symlink inteligente de dependências para prevenir duplicação de disco.
 * `docs/adr/2026-10-06-0003-zero-cost-local-speech-engine.md`: Uso do Apple Speech.framework nativo do macOS via FFI/Objective-C para transcrição offline a custo 0.00€.
 * `docs/adr/2026-10-06-0004-per-agent-model-selection.md`: Seleção dinâmica de modelo de IA por agente com perfis cognitivos (Deep Thinking, Research, Fast/Economic e Local 0.00€ via Ollama).
+
+---
+
+## 5. Histórico de Execução de Tarefas & Estado Atual
+* ✅ **Task 0.1**: Scaffolding Tauri 2 + React 19 + Tailwind CSS v4 (`chore(scaffold)`)
+* ✅ **Task 0.2**: ADRs Fundacionais 0001 a 0004 (`docs(adr)`)
+* ✅ **Task 0.3**: Guardrails CI e Commitlint (`ci(guardrails)`)
+* ✅ **Task 1.1**: Armazenamento SQLite local em Rust (`feat(workspace)`)
+* ✅ **Task 1.2**: WelcomeView com Apple HIG e Drag & Drop (`feat(ui)`)
+* ✅ **Task 1.3**: Gestor de Ciclo de Vida de Git Worktrees em Rust (`feat(git)`)
+* ✅ **Task 1.4**: Gestor de Symlinks Automáticos de Dependências (`feat(git)`)
+* ✅ **Task 1.5**: Alocador Dinâmico de Portas TCP sem Colisão (`feat(network)`)
+* ✅ **Task 1.6**: Interface de Revisão e Fusão Segura (Diff & Merge View) (`feat(ui)`)
+* ⏳ **Próxima Tarefa em Fila**: **Task 2.1: Motor PTY Multiplexer em Rust com Buffer Circular (Módulo 3)**

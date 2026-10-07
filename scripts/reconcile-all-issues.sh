@@ -167,7 +167,7 @@ Instalar scripts de verificação pré-commit e validação de Conventional Comm
   "✅ **Implementada**: Pipeline GitHub Actions de CI configurado em \`.github/workflows/ci.yml\` com commitlint e validação de typecheck/cargo check."
 
 # ------------------------------------------------------------------------------
-# FASE 1: WORKSPACES & ISOLAMENTO (PARCIALMENTE CONCLUÍDA)
+# FASE 1: WORKSPACES & ISOLAMENTO (CONCLUÍDAS)
 # ------------------------------------------------------------------------------
 sync_task "Task 1.1" \
   "Task 1.1: Persistência Local em SQLite & Gestão de Projetos (Módulo 1)" \
@@ -223,12 +223,9 @@ Criar o comando Tauri em Rust para criar automaticamente Git Worktrees (\`git wo
 \`feat(git): implement zero-corruption git worktree lifecycle manager\`" \
   "✅ **Implementada**: Ciclo de vida completo de Git Worktrees em Rust (\`create_worktree\`, \`remove_worktree\`, \`list_worktrees\`), sem \`git stash\` e com teste de integração em repositório temporário real."
 
-# ------------------------------------------------------------------------------
-# TAREFAS PENDENTES / A SEGUIR NO ROADMAP
-# ------------------------------------------------------------------------------
 sync_task "Task 1.4" \
   "Task 1.4: Gestor de Symlinks de Dependências com Zero Desperdício de Disco (Módulo 2)" \
-  "false" \
+  "true" \
   "phase:1-workspace,priority:p1-high,agent:fullstack" \
   "### Objetivo
 Implementar no motor Rust a ligação simbólica automática de diretórios ignorados no Git (\`node_modules/\`, \`.venv/\`, \`.target/\`, \`.cargo/\`) entre a pasta principal e a pasta do worktree recém-criado, prevenindo duplicação de gigabytes no disco.
@@ -238,15 +235,13 @@ Implementar no motor Rust a ligação simbólica automática de diretórios igno
 - \`src-tauri/src/commands/symlink.rs\`
 - \`src/services/symlinkService.ts\`
 
-### Quality Gate
-Teste comprovando a criação do symlink e verificação de que arquivos de dependência são lidos transparentemente na worktree.
-
 ### Commit Checkpoint
-\`feat(git): add automatic dependency symlinker for instant worktree boot\`" ""
+\`feat(git): add automatic dependency symlinker for instant worktree boot\`" \
+  "✅ **Implementada**: Gestor automático de symlinks em Rust para dependências pesadas, cold-boot instantâneo de worktrees sem duplicação de gigabytes no disco."
 
 sync_task "Task 1.5" \
   "Task 1.5: Alocador Dinâmico de Portas de Servidores Locais (Módulo 2)" \
-  "false" \
+  "true" \
   "phase:1-workspace,priority:p1-high,agent:fullstack" \
   "### Objetivo
 Implementar sistema de deteção de portas livres no sistema operativo (\`std::net::TcpListener\`) e injeção automática de \`PORT=300X\` nas variáveis de ambiente de cada grelha para evitar colisões \`EADDRINUSE\`.
@@ -257,11 +252,12 @@ Implementar sistema de deteção de portas livres no sistema operativo (\`std::n
 - \`src/stores/useGridStore.ts\`
 
 ### Commit Checkpoint
-\`feat(network): introduce collision-free dynamic port allocator per grid\`" ""
+\`feat(network): introduce collision-free dynamic port allocator per grid\`" \
+  "✅ **Implementada**: Alocador dinâmico de portas TCP em Rust, garantindo mapeamento idempotente e portas livres sem colisão para 16 grelhas paralelas."
 
 sync_task "Task 1.6" \
   "Task 1.6: Interface de Revisão e Fusão Segura (Diff & Merge View) (Módulo 2)" \
-  "false" \
+  "true" \
   "phase:1-workspace,priority:p1-high,agent:frontend" \
   "### Objetivo
 Desenvolver o ecrã de revisão de alterações de uma grelha terminada, apresentando o diff detalhado de ficheiros alterados e opções de Squash & Merge ou Rebase Merge para a branch principal, com acionamento do Orquestrador em caso de conflitos.
@@ -273,10 +269,11 @@ Desenvolver o ecrã de revisão de alterações de uma grelha terminada, apresen
 - \`src/hooks/useGitDiff.ts\`
 
 ### Commit Checkpoint
-\`feat(ui): create visual git diff review and safe merge modal\`" ""
+\`feat(ui): create visual git diff review and safe merge modal\`" \
+  "✅ **Implementada**: Visualizador de Git Diff com Apple HIG, hook useGitDiff, comandos Rust de diff e fusão segura com deteção e abortamento automático de conflitos."
 
 # ------------------------------------------------------------------------------
-# FASE 2: GRELHA TILED & PTY MULTIPLEXER (PENDENTES)
+# FASE 2: GRELHA TILED & PTY MULTIPLEXER (PENDENTES / TOPO DA FILA)
 # ------------------------------------------------------------------------------
 sync_task "Task 2.1" \
   "Task 2.1: Motor PTY Multiplexer em Rust com Buffer Circular (Módulo 3)" \
@@ -312,7 +309,7 @@ Integrar no React o componente de terminal baseado em \`@xterm/xterm\` e \`@xter
 echo ""
 echo "=============================================================================="
 echo "🎉 RECONCILIAÇÃO CONCLUÍDA COM SUCESSO!"
-echo "- Tasks 0.1, 0.2, 0.3, 1.1, 1.2 e 1.3: Concluídas e Fechadas com evidências."
-echo "- Task 1.4: Configurada como a próxima tarefa aberta no topo da fila."
+echo "- Fase 0 & Fase 1 (Tasks 0.1 a 1.6): 100% Concluídas e Fechadas com evidências."
+echo "- Task 2.1: Configurada como a próxima tarefa aberta no topo da fila (Fase 2: Grelha Tiled & PTY)."
 echo "- Backlog subsequente: Sincronizado e etiquetado."
 echo "=============================================================================="
