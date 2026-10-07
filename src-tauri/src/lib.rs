@@ -36,10 +36,11 @@ pub fn run() {
             commands::project::upsert_project,
             commands::project::list_recent_projects,
             commands::project::delete_project,
-            // Comandos de Git Worktree
+            // Comandos de Git Worktree & Symlinks
             commands::worktree::create_worktree,
             commands::worktree::remove_worktree,
             commands::worktree::list_worktrees,
+            commands::symlink::symlink_dependencies,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

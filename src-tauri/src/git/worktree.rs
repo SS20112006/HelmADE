@@ -73,6 +73,9 @@ pub fn create_worktree(
         return Err(format!("Erro do Git ao criar worktree: {stderr}"));
     }
 
+    // Liga dependências pesadas por symlink de forma automática e transparente
+    let _ = crate::git::symlink::link_dependencies(repo, &worktree_dir);
+
     let now = SystemTime::now()
         .duration_since(UNIX_EPOCH)
         .unwrap_or_default()
@@ -99,6 +102,9 @@ pub fn remove_worktree(
     let branch = format!("helm/swarm-{clean_id}");
 
     if worktree_dir.exists() {
+        // Desliga dependências antes de remover o worktree para evitar apagar links em cascata
+        let _ = crate::git::symlink::unlink_dependencies(&worktree_dir);
+
         let output = Command::new("git")
             .current_dir(repo)
             .args(["worktree", "remove", "--force", worktree_dir.to_str().unwrap()])
@@ -199,7 +205,6 @@ pub fn list_worktrees(repo_path: &str) -> Result<Vec<WorktreeInfo>, String> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use std::time::Duration;
 
     #[test]
     fn test_worktree_lifecycle_in_temp_repo() {
@@ -228,6 +233,11 @@ mod tests {
             .args(["config", "user.email", "test@helmade.dev"])
             .status();
 
+        // Criar pasta simulada de node_modules na raiz
+        let node_modules_dir = temp_dir.join("node_modules");
+        fs::create_dir_all(&node_modules_dir).unwrap();
+        fs::write(node_modules_dir.join("pkg.json"), r#"{"name":"test"}"#).unwrap();
+
         // Criar ficheiro inicial e commit
         fs::write(temp_dir.join("README.md"), "# HelmADE Test").unwrap();
         let _ = Command::new("git")
@@ -249,6 +259,8 @@ mod tests {
         assert_eq!(wt.swarm_id, swarm_id);
         assert!(Path::new(&wt.path).exists());
         assert!(Path::new(&wt.path).join("README.md").exists());
+        // Verificar que o symlink de dependências foi criado automaticamente
+        assert!(Path::new(&wt.path).join("node_modules").join("pkg.json").exists());
 
         // 2. Listar Worktrees
         let list = list_worktrees(repo_str).expect("falha ao listar worktrees");
@@ -258,6 +270,8 @@ mod tests {
         let removed = remove_worktree(repo_str, swarm_id, true).expect("falha ao remover worktree");
         assert!(removed);
         assert!(!Path::new(&wt.path).exists());
+        // Assegurar que node_modules na raiz permanece intacto
+        assert!(temp_dir.join("node_modules").join("pkg.json").exists());
 
         // Limpeza do diretório de teste
         let _ = fs::remove_dir_all(&temp_dir);
