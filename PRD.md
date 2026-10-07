@@ -129,6 +129,14 @@ graph TD
     * Painel 5: `QA & Security Auditor` (`qa-security-auditor.md`)
     * Painel 6: Terminal da Shell do Sistema para o servidor local (`npm run dev`).
 * **R4.3 — Injeção de Contexto Automática:** Ao arrancar um terminal com um agente, a aplicação deve injetar de forma transparente o prompt de sistema do ficheiro `.md` respetivo, as variáveis de ambiente necessárias e o diretório de trabalho correto.
+* **R4.4 — Seleção de Modelo de IA por Agente & Perfis Cognitivos:**
+  - A aplicação deve permitir ao utilizador escolher e configurar o modelo de IA específico para cada agente da equipa (no configurador de presets e no cabeçalho de cada painel).
+  - Suporte a categorização por perfil cognitivo:
+    * **Raciocínio Profundo / Extended Thinking** (ex.: Claude 3.7 Sonnet / o3-mini) para o Orquestrador, Arquitetura e QA Auditor.
+    * **Pesquisa & Contexto Longo** (ex.: Gemini 2.5 Pro / Flash) para exploração de especificações e documentação.
+    * **Velocidade & Economia** (ex.: Haiku / GPT-4o-mini) para tarefas rotineiras de frontend e refactors simples.
+    * **Local & Offline (0.00€)** (ex.: Ollama / llama3 / deepseek-r1 locais) preservando o invariante de custo zero e privacidade total.
+  - A seleção de modelo deve persistir localmente e injetar as flags/variáveis de ambiente correspondentes (ex.: `--model <id>`) no comando de arranque do agente no PTY.
 
 ---
 
