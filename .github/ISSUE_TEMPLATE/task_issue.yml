@@ -1,0 +1,83 @@
+name: "Task Issue"
+description: "Template oficial de tracking de tarefas do Roadmap do HelmADE"
+title: "[Task]: "
+labels: ["task", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### ⚓ HelmADE Task Tracking
+        Template padrão para planeamento e execução orientada por Git/Agentes.
+  - type: dropdown
+    id: phase
+    attributes:
+      label: "Fase do Roadmap"
+      description: "A que fase pertence esta tarefa?"
+      options:
+        - "FASE 0: Scaffolding, Guardrails & Arquitetura Base"
+        - "FASE 1: Workspaces, Git Worktrees & Isolamento"
+        - "FASE 2: Grelha Tiled & Multiplexador de Terminais"
+        - "FASE 3: Motor de Agentes Antigravity (.md) & Team Wire"
+        - "FASE 4: Live Preview & Navegador Integrado"
+        - "FASE 5: HelmVoice (Reconhecimento de Voz 0.00€)"
+        - "FASE 6: Governação, Telemetria & Streamer Shield"
+        - "FASE 7: Auditorias Apple HIG, Ponytail & E2E"
+        - "FASE 8: Packaging & Release v1.0.0"
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: "Prioridade"
+      options:
+        - "P0 - Crítica (Bloqueador de Fundação)"
+        - "P1 - Alta (Requisito Central do Módulo)"
+        - "P2 - Média (Funcionalidade Complementar)"
+        - "P3 - Baixa (Polimento / Otimização)"
+    validations:
+      required: true
+  - type: dropdown
+    id: agent
+    attributes:
+      label: "Agente Especialista Designado"
+      options:
+        - "fullstack-engineer"
+        - "frontend-design-specialist"
+        - "apple-hig-specialist"
+        - "database-specialist"
+        - "qa-security-auditor"
+        - "devops-release"
+        - "performance-engineer"
+        - "complexity-auditor"
+        - "silent-failure-hunter"
+        - "system-architect"
+    validations:
+      required: true
+  - type: textarea
+    id: objective
+    attributes:
+      label: "Objetivo da Tarefa"
+      placeholder: "Descreve sucintamente o que deve ser implementado..."
+    validations:
+      required: true
+  - type: textarea
+    id: files
+    attributes:
+      label: "Ficheiros Afetados"
+      placeholder: "- src-tauri/src/...\n- src/..."
+    validations:
+      required: true
+  - type: textarea
+    id: quality_gate
+    attributes:
+      label: "Quality Gate & Critérios de Aceitação"
+      placeholder: "Comandos exatos de verificação que têm de passar a verde antes do commit (ex: cargo check, npm run build)..."
+    validations:
+      required: true
+  - type: input
+    id: commit_checkpoint
+    attributes:
+      label: "Conventional Commit Checkpoint"
+      placeholder: "feat(modulo): descricao no modo imperativo"
+    validations:
+      required: true

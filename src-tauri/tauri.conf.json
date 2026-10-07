@@ -21,7 +21,6 @@
         "center": true,
         "decorations": false,
         "transparent": true,
-        "vibrancy": "under-window",
         "titleBarStyle": "overlay"
       }
     ],
