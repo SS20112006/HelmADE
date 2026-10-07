@@ -1,5 +1,6 @@
 pub mod commands;
 pub mod db;
+pub mod git;
 
 use db::DbState;
 use std::fs;
@@ -31,9 +32,14 @@ pub fn run() {
         .manage(db_state)
         .plugin(tauri_plugin_dialog::init())
         .invoke_handler(tauri::generate_handler![
+            // Comandos de Projetos & SQLite
             commands::project::upsert_project,
             commands::project::list_recent_projects,
             commands::project::delete_project,
+            // Comandos de Git Worktree
+            commands::worktree::create_worktree,
+            commands::worktree::remove_worktree,
+            commands::worktree::list_worktrees,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
